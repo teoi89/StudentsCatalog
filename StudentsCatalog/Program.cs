@@ -1,14 +1,19 @@
-﻿using System;
+﻿using StudentsCatalog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace StudentCatalog
 {
+    /// <summary>
+    /// Represents a program to manage student catalog.
+    /// </summary>
     class Program
     {
         static void Main()
         {
             var catalog = new Catalog();
+            catalog.GenerateDefaultStudents();
             string menu = "Choose an option:\n" +
                           "1. Display all students\n" +
                           "2. Display a student by ID\n" +
