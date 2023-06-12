@@ -10,6 +10,8 @@ namespace StudentsCatalog
     /// </summary>
     class Student
     {
+        private IEnumerable<Grade> grades;
+
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -27,25 +29,28 @@ namespace StudentsCatalog
             Grades = new List<Grade>();
         }
         /// <summary>
-        /// Displays the details of the student.
+        /// Displays the student's information with teacher's names for each subject.
         /// </summary>
-        public void DisplayStudent()
+        public void DisplayStudentWithTeacher()
         {
             Console.WriteLine($"ID: {Id}");
-            Console.WriteLine($"Name: {FirstName} {LastName}");
+            Console.WriteLine($"First Name: {FirstName}");
+            Console.WriteLine($"Last Name: {LastName}");
             Console.WriteLine($"Age: {Age}");
-            Console.WriteLine("Address:");
-            Console.WriteLine($"City: {Address.City}");
-            Console.WriteLine($"Street: {Address.Street}");
-            Console.WriteLine($"Number: {Address.Number}");
             Console.WriteLine("Grades:");
-            foreach (Grade grade in Grades)
+            foreach (Grade grade in grades)
             {
-                Console.WriteLine($"Subject: {grade.Subject}");
-                Console.WriteLine($"Value: {grade.Value}");
-                Console.WriteLine($"Date and Time: {grade.DateTime}");
+                Console.WriteLine($"Subject: {grade.Subject}, Teacher: {GetTeacherName(grade.Subject)}, Grade: {grade.Value}");
             }
+            Console.WriteLine($"Average Grade: {GetAverageGrade()}");
+            Console.WriteLine($"Address: {Address.City}, {Address.Street} {Address.Number}");
         }
+
+        private object GetTeacherName(string subject)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Adds a grade to the student.
         /// </summary>

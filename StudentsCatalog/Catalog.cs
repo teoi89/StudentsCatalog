@@ -11,6 +11,7 @@ namespace StudentsCatalog
     class Catalog
     {
         private List<Student> students = new List<Student>();
+        private Dictionary<string, string> subjectTeachers = new Dictionary<string, string>();
         /// <summary>
         /// Generates a list of default students.
         /// </summary>
@@ -41,9 +42,22 @@ namespace StudentsCatalog
             Console.WriteLine("\nAll Students:\n");
             foreach (Student student in students)
             {
-                student.DisplayStudent();
+                student.DisplayStudentWithTeacher();
                 Console.WriteLine();
             }
+        }
+        /// <summary>
+        /// Retrieves the teacher's name for a given subject.
+        /// </summary>
+        /// <param name="subject">The subject to get the teacher's name for.</param>
+        /// <returns>The teacher's name for the subject.</returns>
+        public string GetTeacherName(string subject)
+        {
+            if (subjectTeachers.ContainsKey(subject))
+            {
+                return subjectTeachers[subject];
+            }
+            return "N/A";
         }
         /// <summary>
         /// Displays the details of a student by their ID.
@@ -55,7 +69,7 @@ namespace StudentsCatalog
             if (student != null)
             {
                 Console.WriteLine("\nStudent Details:\n");
-                student.DisplayStudent();
+                student.DisplayStudentWithTeacher();
                 Console.WriteLine();
             }
             else
@@ -176,6 +190,25 @@ namespace StudentsCatalog
                 Console.WriteLine("\nEnter grade details:");
                 Console.Write("Subject: ");
                 string subject = Console.ReadLine();
+
+                // Check if the subject already has a teacher assigned
+                if (subjectTeachers.ContainsKey(subject))
+                {
+                    Console.WriteLine($"Current Teacher for {subject}: {subjectTeachers[subject]}");
+                    Console.Write("Enter new Teacher's Name (or leave blank to keep the current teacher): ");
+                    string newTeacher = Console.ReadLine().Trim();
+                    if (!string.IsNullOrEmpty(newTeacher))
+                    {
+                        subjectTeachers[subject] = newTeacher;
+                    }
+                }
+                else
+                {
+                    Console.Write("Enter Teacher's Name: ");
+                    string teacher = Console.ReadLine().Trim();
+                    subjectTeachers[subject] = teacher;
+                }
+
                 Console.Write("Value: ");
                 double value = double.Parse(Console.ReadLine());
 
@@ -188,6 +221,22 @@ namespace StudentsCatalog
             {
                 Console.WriteLine($"\nStudent with ID {id} not found.\n");
             }
+        }
+
+        public void UpdateTeacherForSubject(string subject, string newTeacher)
+        {
+            if (subjectTeachers.ContainsKey(subject))
+            {
+                subjectTeachers[subject] = newTeacher;
+            }
+            else
+            {
+                Console.WriteLine($"\nSubject '{subject}' does not exist.\n");
+            }
+        }
+        public bool SubjectExists(string subject)
+        {
+            return subjectTeachers.ContainsKey(subject);
         }
         /// <summary>
         /// Displays the overall average grade for a student by their ID.
@@ -243,7 +292,7 @@ namespace StudentsCatalog
             Console.WriteLine("\nStudents in descending order of average:\n");
             foreach (Student student in sortedStudents)
             {
-                student.DisplayStudent();
+                student.DisplayStudentWithTeacher();
                 Console.WriteLine();
             }
         }

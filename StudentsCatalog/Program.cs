@@ -15,18 +15,19 @@ namespace StudentCatalog
             var catalog = new Catalog();
             catalog.GenerateDefaultStudents();
             string menu = "Choose an option:\n" +
-                          "1. Display all students\n" +
-                          "2. Display a student by ID\n" +
-                          "3. Add a student\n" +
-                          "4. Remove a student\n" +
-                          "5. Modify student data\n" +
-                          "6. Modify student address\n" +
-                          "7. Assign a grade to a student\n" +
-                          "8. Display overall student average\n" +
-                          "9. Display subject-wise average for a student\n" +
-                          "10. Display students in descending order of average\n" +
-                          "11. Exit\n" +
-                          "Option = ";
+                         "1. Display all students\n" +
+                         "2. Display a student by ID\n" +
+                         "3. Add a student\n" +
+                         "4. Remove a student\n" +
+                         "5. Modify student data\n" +
+                         "6. Modify student address\n" +
+                         "7. Assign a grade to a student\n" +
+                         "8. Display overall student average\n" +
+                         "9. Display subject-wise average for a student\n" +
+                         "10. Display students in descending order of average\n" +
+                         "11. Update Teacher's Name for a subject\n" + // Option to update teacher's name
+                         "12. Exit\n" +
+                         "Option = ";
 
             while (true)
             {
@@ -80,6 +81,21 @@ namespace StudentCatalog
                         catalog.DisplayStudentsInDescendingOrder();
                         break;
                     case "11":
+                        Console.Write("Enter subject to update Teacher's Name: ");
+                        string subject = Console.ReadLine();
+                        if (!catalog.SubjectExists(subject))
+                        {
+                            Console.WriteLine($"\nSubject '{subject}' does not exist.\n");
+                        }
+                        else
+                        {
+                            Console.Write("Enter new Teacher's Name: ");
+                            string newTeacher = Console.ReadLine().Trim();
+                            catalog.UpdateTeacherForSubject(subject, newTeacher);
+                            Console.WriteLine("\nTeacher's Name updated successfully.\n");
+                        }
+                        break;
+                    case "12":
                         return;
                     default:
                         Console.WriteLine("\nInvalid option chosen. Please try again.\n");
