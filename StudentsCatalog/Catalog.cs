@@ -18,11 +18,11 @@ namespace StudentsCatalog
         {
             students = new List<Student>
             {
-                new Student(1, "John", "Doe", 20, new Address("City1", "Street1", "1")),
-                new Student(2, "Jane", "Smith", 22, new Address("City2", "Street2", "2")),
-                new Student(3, "Michael", "Johnson", 21, new Address("City3", "Street3", "3")),
-                new Student(4, "Emily", "Williams", 19, new Address("City4", "Street4", "4")),
-                new Student(5, "Daniel", "Brown", 23, new Address("City5", "Street5", "5"))
+                new Student(1, "Dacian", "Marcu", 20, new Address("Oradea", "Noua", "1")),
+                new Student(2, "Ioan", "Smith", 22, new Address("Alesd", "Lunga", "2")),
+                new Student(3, "Michael", "Popescu", 21, new Address("Marghita", "Lalelelor", "3")),
+                new Student(4, "Emily", "Papp", 19, new Address("Vascau", "Libertatii", "4")),
+                new Student(5, "Daniel", "Marcovici", 23, new Address("Ciumeghiu", "Teiului", "5"))
             };
 
             Console.WriteLine("\nDefault students generated successfully.\n");
@@ -86,11 +86,20 @@ namespace StudentsCatalog
             Console.Write("Number: ");
             string number = Console.ReadLine();
 
-            Address address = new Address(city, street, number);
+            var address = new Address(city, street, number);
+
             Student student = new Student(id, firstName, lastName, age, address);
             students.Add(student);
 
             Console.WriteLine("\nStudent added successfully.\n");
+            DisplayStudentAddress(student);
+        }
+        private void DisplayStudentAddress(Student student)
+        {
+            Console.WriteLine("\nStudent Address:");
+            Console.WriteLine($"City: {student.Address.City}");
+            Console.WriteLine($"Street: {student.Address.Street}");
+            Console.WriteLine($"Number: {student.Address.Number}\n");
         }
         /// <summary>
         /// Removes a student from the catalog by their ID.

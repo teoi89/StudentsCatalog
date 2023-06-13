@@ -15,8 +15,6 @@ namespace StudentsCatalog
             Subject = subject;
         }
 
-        public string Subject { get; set; }
-        public double Value { get; set; }
         public object DateTime { get; internal set; }
     }
 }
