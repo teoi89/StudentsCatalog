@@ -9,15 +9,26 @@ namespace StudentsCatalog
     /// </summary>
     class Address
     {
-        public string City { get; set; }
-        public string Street { get; set; }
-        public string Number { get; set; }
-
-        public Address(string city, string street, string number)
+        public Address(string v1, string v2, string v3)
         {
-            City = city;
-            Street = street;
-            Number = number;
+        }
+
+        public object City { get; internal set; }
+        public object Street { get; internal set; }
+        public object Number { get; internal set; }
+
+        internal class StudentAddress
+        {
+            public string City { get; set; }
+            public string Street { get; set; }
+            public string Number { get; set; }
+
+            public StudentAddress(string city, string street, string number)
+            {
+                City = city;
+                Street = street;
+                Number = number;
+            }
         }
     }
 }

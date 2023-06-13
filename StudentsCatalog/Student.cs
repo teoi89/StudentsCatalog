@@ -10,14 +10,13 @@ namespace StudentsCatalog
     /// </summary>
     class Student
     {
-        private IEnumerable<Grade> grades;
-
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int Age { get; set; }
         public Address Address { get; set; }
         public List<Grade> Grades { get; set; }
+        public Dictionary<string, string> Teachers { get; set; }
 
         public Student(int id, string firstName, string lastName, int age, Address address)
         {
@@ -27,30 +26,29 @@ namespace StudentsCatalog
             Age = age;
             Address = address;
             Grades = new List<Grade>();
+            Teachers = new Dictionary<string, string>();
         }
         /// <summary>
-        /// Displays the student's information with teacher's names for each subject.
+        /// Displays the details of the student.
         /// </summary>
-        public void DisplayStudentWithTeacher()
+        public void DisplayStudent()
         {
             Console.WriteLine($"ID: {Id}");
-            Console.WriteLine($"First Name: {FirstName}");
-            Console.WriteLine($"Last Name: {LastName}");
+            Console.WriteLine($"Name: {FirstName} {LastName}");
             Console.WriteLine($"Age: {Age}");
+            Console.WriteLine("Address:");
+            Console.WriteLine($"City: {Address.City}");
+            Console.WriteLine($"Street: {Address.Street}");
+            Console.WriteLine($"Number: {Address.Number}");
             Console.WriteLine("Grades:");
-            foreach (Grade grade in grades)
+            foreach (Grade grade in Grades)
             {
-                Console.WriteLine($"Subject: {grade.Subject}, Teacher: {GetTeacherName(grade.Subject)}, Grade: {grade.Value}");
+                Console.WriteLine($"Subject: {grade.Subject}");
+                Console.WriteLine($"Teacher: {Teachers[grade.Subject]}"); // Display teacher's name for the subject
+                Console.WriteLine($"Value: {grade.Value}");
+                Console.WriteLine($"Date and Time: {grade.DateTime}");
             }
-            Console.WriteLine($"Average Grade: {GetAverageGrade()}");
-            Console.WriteLine($"Address: {Address.City}, {Address.Street} {Address.Number}");
         }
-
-        private object GetTeacherName(string subject)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Adds a grade to the student.
         /// </summary>
